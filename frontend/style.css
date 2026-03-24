@@ -1,0 +1,110 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+.app {
+    height: 100%;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    background: #121212;
+    position: relative;
+}
+
+#auth-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100%;
+    justify-content: center;
+}
+
+#auth-container input, #auth-container button {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+}
+
+#auth-container button {
+    background-color: #fe2c55;
+    color: white;
+    cursor: pointer;
+}
+
+#video-feed-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.6), transparent);
+    box-sizing: border-box;
+}
+
+.header button {
+    background: transparent;
+    border: 1px solid white;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.video-feed {
+    height: 100%;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+}
+
+.video-feed::-webkit-scrollbar {
+    display: none;
+}
+
+.video-container {
+    height: 100%;
+    width: 100%;
+    scroll-snap-align: start;
+    position: relative;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.video-container video {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.video-info {
+    position: absolute;
+    bottom: 40px;
+    left: 20px;
+    z-index: 10;
+    max-width: 80%;
+}
+
+.video-info h3 {
+    margin: 0;
+    font-size: 16px;
+    text-shadow: 1px 1px 2px black;
+}
