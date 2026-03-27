@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll - Infinite Feed</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app-container">
+        <!-- Floating Header -->
+        <header class="glass-header">
+            <h1>Scroll</h1>
+            <div>
+                <button id="upload-btn" class="glass-btn" style="margin-right: 10px;" onclick="document.getElementById('upload-modal').style.display='flex'">+ Upload</button>
+                <button id="logout-btn" class="glass-btn" onclick="logout()">Logout</button>
+            </div>
+        </header>
+
+        <!-- Video Feed Container -->
+        <div id="video-feed" class="scroll-container">
+            <!-- Videos inject here via JS -->
+            <div class="video-placeholder">
+                <p>Loading the feed...</p>
+            </div>
+        </div>
+
+        <!-- Upload Modal -->
+        <div id="upload-modal" class="modal-overlay" style="display: none;">
+            <div class="modal-content glass-panel">
+                <h2>Upload Video</h2>
+                <input type="text" id="upload-title" placeholder="Video Title" class="glass-input" style="margin-top:15px;">
+                <textarea id="upload-desc" placeholder="Description" class="glass-input"></textarea>
+                <input type="file" id="upload-file" accept="video/mp4" class="glass-input" style="padding:5px;">
+                <p id="upload-error" class="error-text"></p>
+                <p id="upload-progress" style="color:var(--text-light);font-size:0.9rem;display:none;">Uploading... Please wait.</p>
+                <div class="modal-actions">
+                    <button class="glass-btn" onclick="closeUploadModal()" style="flex:1;">Cancel</button>
+                    <button id="submit-upload" class="primary-btn" onclick="uploadVideo()" style="flex:2;">Upload</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

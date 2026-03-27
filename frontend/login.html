@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll - Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="center-body auth-bg">
+    <div class="auth-box glass-panel">
+        <h1 class="brand-title">Scroll</h1>
+        <p class="subtitle">Enter the infinite feed.</p>
+        
+        <div class="tabs">
+            <button class="tab active" id="tab-login" onclick="toggleAuth('login')">Login</button>
+            <button class="tab" id="tab-register" onclick="toggleAuth('register')">Register</button>
+        </div>
+
+        <form id="auth-form" onsubmit="handleAuth(event)">
+            <input type="text" id="username" placeholder="Username" required class="glass-input">
+            <input type="password" id="password" placeholder="Password" required class="glass-input">
+            <button type="submit" class="primary-btn" id="auth-submit">Login</button>
+        </form>
+        <p id="auth-error" class="error-text"></p>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+# postgres config
+POSTGRES_HOST=your_db_hostname          # e.g., localhost or your db container name
+POSTGRES_PORT=5432                      # e.g., 5432
+POSTGRES_USER=your_postgres_user
+POSTGRES_PASSWORD=your_postgres_password
+
+# Database names dedicated to each service
+POSTGRES_DB_USERS=users_db
+POSTGRES_DB_VIDEOS=videos_db
+POSTGRES_DB_ANALYTICS=analytics_db
+
+# aws config
+AWS_ACCESS_KEY_ID=your_aws_access_key
+AWS_SECRET_ACCESS_KEY=your_aws_secret_key
+AWS_DEFAULT_REGION=your_aws_region      # e.g., us-east-1
+AWS_REGION=your_aws_region              # Can be kept identical to AWS_DEFAULT_REGION
+AWS_STORAGE_BUCKET_NAME=your_bucket_name
+
+# django core settings
+SECRET_KEY=your_django_secret_key       # Keep this random and secret in production
+DEBUG=True                              # Set to False in production
+ALLOWED_HOSTS=localhost,127.0.0.1       # Comma-separated list of allowed hostnames
