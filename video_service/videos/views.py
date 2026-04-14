@@ -4,6 +4,14 @@ from .models import Video
 from .serializers import VideoSerializer
 from .s3_utils import upload_video_to_s3
 from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.decorators import api_view
+
+@api_view(['GET'])
+def health_check(request):
+    return Response({
+        "status": "ok",
+        "service": "video_service"
+    })
 
 class VideoListCreateView(generics.ListCreateAPIView):
     queryset = Video.objects.all()
@@ -40,3 +48,4 @@ class VideoDetailView(generics.RetrieveAPIView):
     queryset = Video.objects.all()
     serializer_class = VideoSerializer
     permission_classes = [permissions.AllowAny]
+
