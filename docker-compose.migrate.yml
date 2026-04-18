@@ -1,0 +1,32 @@
+
+services:
+  users_service_migrate:
+    image: users_service:${USERS_SERVICE_TAG}
+    command: ["python", "manage.py", "migrate"]
+    environment:
+      DATABASE_URL: ${USERS_DB_URL}
+    networks:
+      - my_network
+    restart: "no"
+
+  video_service_migrate:
+    image: video_service:${VIDEO_SERVICE_TAG}
+    command: ["python", "manage.py", "migrate"]
+    environment:
+      DATABASE_URL: ${VIDEO_DB_URL}
+    networks:
+      - my_network
+    restart: "no"
+
+  analytics_service_migrate:
+    image: analytics_service:${ANALYTICS_SERVICE_TAG}
+    command: ["python", "manage.py", "migrate"]
+    environment:
+      DATABASE_URL: ${ANALYTICS_DB_URL}
+    networks:
+      - my_network
+    restart: "no"
+
+networks:
+  my_network:
+    external: true

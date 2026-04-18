@@ -1,59 +1,69 @@
+
 services:
-  user-service:
-    image: users_service:1.0.0
-    container_name: user-service
-    restart: always
-    env_file: .env
-    depends_on:
-      - postgresql
-    ports:
-      - "8001:8001"
-
-  video-service:
-    image: video_service:1.0.0
-    container_name: video-service
-    restart: always
-    env_file: .env
-    depends_on:
-      - user-service
-    ports:
-      - "8002:8002"
-  
-  analytics-service:
-    image: analytics_service:1.0.0
-    container_name: analytics-service
-    restart: always
-    env_file: .env
-    depends_on:
-      - video-service
-    ports:
-      - "8003:8003"
-
-  frontend:
-    image: frontend:1.0.0
-    container_name: frontend
-    restart: always
-    env_file: .env
-    depends_on:
-      - analytics-service
-    ports:
-      - 8000:8000
-    
   postgresql:
     image: postgres:18-bookworm
     container_name: scroll-postgres-db
     restart: always
-
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-
     ports:
       - "5432:5432"
-
     volumes:
       - ./database:/docker-entrypoint-initdb.d
       - scroll_postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - scroll-network
+
+  user-service:
+    image: users_service:1.0.1
+    container_name: user-service
+    restart: always
+    env_file: .env
+    depends_on:
+      postgresql:
+        condition: service_healthy
+    ports:
+      - "8001:8001"
+    networks:
+      - scroll-network
+
+  video-service:
+    image: video_service:1.0.1
+    container_name: video-service
+    restart: always
+    env_file: .env
+    ports:
+      - "8002:8002"
+    networks:
+      - scroll-network
+
+  analytics-service:
+    image: analytics_service:1.0.1
+    container_name: analytics-service
+    restart: always
+    env_file: .env
+    ports:
+      - "8003:8003"
+    networks:
+      - scroll-network
+
+  frontend:
+    image: frontend:1.0.0
+    container_name: frontend-service
+    restart: always
+    ports:
+      - "8000:80"
+    networks:
+      - scroll-network
 
 volumes:
   scroll_postgres_data:
+
+networks:
+  scroll-network:
