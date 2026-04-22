@@ -1,0 +1,44 @@
+
+services:
+
+  user-service:
+    image: users_service:1.0.1
+    container_name: user-service
+    restart: always
+    env_file: .env
+    ports:
+      - "8001:8001"
+    networks:
+      - scroll-network
+
+  video-service:
+    image: video_service:1.0.1
+    container_name: video-service
+    restart: always
+    env_file: .env
+    ports:
+      - "8002:8002"
+    networks:
+      - scroll-network
+
+  analytics-service:
+    image: analytics_service:1.0.1
+    container_name: analytics-service
+    restart: always
+    env_file: .env
+    ports:
+      - "8003:8003"
+    networks:
+      - scroll-network
+
+  frontend:
+    image: frontend:1.0.0
+    container_name: frontend-service
+    restart: always
+    ports:
+      - "8000:80"
+    networks:
+      - scroll-network
+
+networks:
+  scroll-network:
