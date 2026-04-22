@@ -1,32 +1,35 @@
 
 services:
   users_service_migrate:
-    image: users_service:${USERS_SERVICE_TAG}
+    image: users_service:1.0.1
     command: ["python", "manage.py", "migrate"]
     environment:
-      DATABASE_URL: ${USERS_DB_URL}
-    networks:
-      - my_network
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB_USERS}
     restart: "no"
 
   video_service_migrate:
-    image: video_service:${VIDEO_SERVICE_TAG}
+    image: video_service:1.0.1
     command: ["python", "manage.py", "migrate"]
     environment:
-      DATABASE_URL: ${VIDEO_DB_URL}
-    networks:
-      - my_network
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB_VIDEOS}
     restart: "no"
 
   analytics_service_migrate:
-    image: analytics_service:${ANALYTICS_SERVICE_TAG}
+    image: analytics_service:1.0.1
     command: ["python", "manage.py", "migrate"]
     environment:
-      DATABASE_URL: ${ANALYTICS_DB_URL}
-    networks:
-      - my_network
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB_ANALYTICS}
     restart: "no"
 
-networks:
-  my_network:
-    external: true

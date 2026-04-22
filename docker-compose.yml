@@ -1,33 +1,11 @@
 
 services:
-  postgresql:
-    image: postgres:18-bookworm
-    container_name: scroll-postgres-db
-    restart: always
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-    ports:
-      - "5432:5432"
-    volumes:
-      - ./database:/docker-entrypoint-initdb.d
-      - scroll_postgres_data:/var/lib/postgresql
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
-    networks:
-      - scroll-network
 
   user-service:
     image: users_service:1.0.1
     container_name: user-service
     restart: always
     env_file: .env
-    depends_on:
-      postgresql:
-        condition: service_healthy
     ports:
       - "8001:8001"
     networks:
@@ -61,9 +39,6 @@ services:
       - "8000:80"
     networks:
       - scroll-network
-
-volumes:
-  scroll_postgres_data:
 
 networks:
   scroll-network:
